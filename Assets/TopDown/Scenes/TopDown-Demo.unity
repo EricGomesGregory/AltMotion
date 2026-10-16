@@ -1190,7 +1190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.TopDown::Game.TopDown.AttackTrigger
   owner: {fileID: 41319839}
-  damage: 1
+  damage: 5
   collider: {fileID: 0}
 --- !u!1 &2087343104
 GameObject:
