@@ -9,6 +9,7 @@ namespace Game.TopDown.Runtime
         [SerializeField] private CharacterAnimations animations;
         
         [SerializeField, HideInInspector] private NavMeshAgent agent;
+        [SerializeField, HideInInspector] private AttackTrigger attack;
         private float agentSpeed;
         
         private Vector3 moveDirection;
@@ -25,11 +26,16 @@ namespace Game.TopDown.Runtime
 
             agentSpeed = agent.speed;
             animations.OnAttackStateChanged += OnAttackStateChanged;
+            animations.OnAttackTriggered += attack.Perform;
         }
 
         private void SetupReferences() {
             if (agent == null) {
                 agent = GetComponent<NavMeshAgent>();
+            }
+
+            if (attack == null) {
+                attack = GetComponentInChildren<AttackTrigger>();
             }
         }
 
@@ -47,13 +53,15 @@ namespace Game.TopDown.Runtime
         private void Update() {
             var velocity = moveDirection * agent.speed * Time.deltaTime;
             var speed = (moveDirection * agent.speed).magnitude;
-            animations.SetMotion(speed, speed > 0.0 ? moveDirection : lastMoveDirection);
+            var direction = speed > 0.0 ? moveDirection : lastMoveDirection;
+            animations.SetMotion(speed, direction);
             agent.Move(velocity);
+
+            attack.transform.localPosition = direction;
         }
 
         private void OnAttackStateChanged(bool attackState) {
             agent.speed = attackState ? 0.0f : agentSpeed;
-            Debug.Log($"[Player] Character::OnAttackStateChanged: state={attackState} speed={agent.speed}");
         }
     }
 }

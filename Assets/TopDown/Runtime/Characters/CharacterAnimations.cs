@@ -13,7 +13,8 @@ namespace Game.TopDown
 
         [SerializeField, HideInInspector] private Animator animator;
 
-        public event UnityAction<bool> OnAttackStateChanged; 
+        public event UnityAction<bool> OnAttackStateChanged;
+        public event UnityAction OnAttackTriggered;
         
         private Vector2 lastDirection;
         
@@ -35,6 +36,10 @@ namespace Game.TopDown
 
         public void AttackStarted() {
             OnAttackStateChanged?.Invoke(true);
+        }
+
+        public void AttackTriggered() {
+            OnAttackTriggered?.Invoke();
         }
 
         public void AttackEnded() {
