@@ -5,6 +5,6 @@ This is a Unity 6.x repository for 2.5D character controllers hand coded with C#
 ## Top Down
 The TopDown sub-project is a Zelda-like 4-directional character controller with movement and attacking.
 
-![Animation](Documents\Assets\Unity-2.5D-TopDown.gif)
+![Animation](https://raw.githubusercontent.com/EricGomesGregory/AltMotion/main/Documents/Assets/Unity-2.5D-TopDown.gif)
 
 **Note:** Currently attacking is only visual.
